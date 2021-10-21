@@ -110,9 +110,5 @@ public class User implements Serializable {
 		this.order = order;
 	}
 
-	public User() {
-		super();
-	}
-
-
+	
 }

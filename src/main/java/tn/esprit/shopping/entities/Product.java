@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +31,10 @@ public class Product implements Serializable{
     @NotNull
     @Basic(optional = false)
     private String name;
-
+	@JsonBackReference
+    @ManyToOne
+	private Categorie categorie;
+   
     private Double price;
 
     private String pictureUrl;

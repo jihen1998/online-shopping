@@ -24,7 +24,6 @@ import lombok.ToString;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString
 public class OrderProduct {
 
