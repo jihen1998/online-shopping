@@ -33,7 +33,7 @@ public class Product implements Serializable{
     private String name;
 	@JsonBackReference
     @ManyToOne
-	private Categorie categorie;
+	private SousCategorie sousCategorie;
    
     private Double price;
 

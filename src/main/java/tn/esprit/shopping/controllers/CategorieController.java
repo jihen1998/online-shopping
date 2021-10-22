@@ -22,7 +22,7 @@ public class CategorieController {
     }
 
     @PostMapping("/add")
-    public  Categorie signin(Categorie categorie) {
+    public  Categorie create(Categorie categorie) {
         return categorieService.createAndModify(categorie);
     }
 }
