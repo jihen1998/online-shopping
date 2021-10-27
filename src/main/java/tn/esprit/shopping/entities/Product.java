@@ -2,48 +2,41 @@ package tn.esprit.shopping.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.sun.istack.NotNull;
+import com.mongodb.lang.NonNull;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
-@Entity
+
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Document
+
 public class Product implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @NotNull
-    @Basic(optional = false)
+    @NonNull
     private String name;
 	@JsonBackReference
-    @ManyToOne
 	private SousCategorie sousCategorie;
    
     private Double price;
 
     private String pictureUrl;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -69,6 +62,13 @@ public class Product implements Serializable{
 
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
+	}
+
+	public Product(String id, String name, Double price) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
 	}
     
     

@@ -12,7 +12,7 @@ public class CategorieServiceImp implements CategorieService {
 	
 	@Override
 	public List<Categorie> getAllCategories() {
-		return (List<Categorie>) categorieRep.findAll();
+		return categorieRep.findAll();
 	}
 
 	@Override

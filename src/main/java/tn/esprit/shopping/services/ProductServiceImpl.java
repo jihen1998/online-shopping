@@ -1,28 +1,29 @@
 package tn.esprit.shopping.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.shopping.entities.Product;
-import tn.esprit.shopping.repositories.productRepository;
+import tn.esprit.shopping.repositories.Productrepository;
 
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
 
     // productRepository constructor injection
-@Autowired productRepository productRepository;
+@Autowired Productrepository productRepository;
     @Override
-    public Iterable<Product> getAllProducts() {
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
     @Override
-    public Product getProduct(long id) {
+    public Product getProduct(int id) {
         return productRepository
-          .findById(id)
-          .get();
+          .findById(id).orElseThrow(null);
     }
 
     @Override

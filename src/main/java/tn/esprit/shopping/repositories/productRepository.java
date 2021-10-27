@@ -1,10 +1,9 @@
 package tn.esprit.shopping.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import tn.esprit.shopping.entities.Product;
 
-public interface productRepository extends CrudRepository<Product, Long>{
+public interface Productrepository extends  MongoRepository<Product,  Integer>{
 
 }

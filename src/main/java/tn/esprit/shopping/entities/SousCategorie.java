@@ -3,17 +3,11 @@
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.sun.istack.Nullable;
+import com.mongodb.lang.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,19 +19,23 @@ import lombok.ToString;
  @NoArgsConstructor
  @Getter
  @Setter
- @Entity
- @Table(name = "sous_categorie")
+@Document
+
 public class SousCategorie  implements Serializable {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
 	private String name;
 	@Nullable
 	@JsonManagedReference
 	@ToString.Exclude
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categorie")
 	private List<Product> products;
-	  @ManyToOne
-		private Categorie Categorie;
+		private Categorie categorie;
+		public SousCategorie(String id, String name) {
+			super();
+			this.id = id;
+			this.name = name;
+		}
+		
+		
 }

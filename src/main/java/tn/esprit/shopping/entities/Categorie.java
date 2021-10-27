@@ -1,37 +1,54 @@
 package tn.esprit.shopping.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.sun.istack.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-@Entity
+
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString	
+@Document
+
 public class Categorie implements Serializable {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
+    private String id;
 	private String name;
-	@Nullable
+	@com.mongodb.lang.Nullable
 	@JsonManagedReference
 	@ToString.Exclude
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Categorie")
 	private List<SousCategorie> sousCategories;
+	public Categorie(String id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public List<SousCategorie> getSousCategories() {
+		return sousCategories;
+	}
+	public void setSousCategories(List<SousCategorie> sousCategories) {
+		this.sousCategories = sousCategories;
+	}
+
 
 }

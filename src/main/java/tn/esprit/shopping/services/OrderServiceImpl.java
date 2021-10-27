@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.shopping.entities.Order;
-import tn.esprit.shopping.repositories.orderRepository;
+import tn.esprit.shopping.repositories.Orderrepository;
 
 @Service
 @Transactional
 public class OrderServiceImpl implements OrderService {
 
     // orderRepository constructor injection
-@Autowired orderRepository orderRepository;
+@Autowired Orderrepository orderRepository;
     @Override
     public Iterable<Order> getAllOrders() {
         return this.orderRepository.findAll();

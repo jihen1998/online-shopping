@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.shopping.entities.Categorie;
+import tn.esprit.shopping.dto.SousCategorieDTO;
 import tn.esprit.shopping.entities.SousCategorie;
-import tn.esprit.shopping.services.CategorieService;
 import tn.esprit.shopping.services.SousCategorieService;
 
 @RestController
@@ -26,7 +25,8 @@ public class SousCategorieController {
     }
 
     @PostMapping("/add")
-    public  SousCategorie create(SousCategorie souscategorie) {
-        return sousCategorieService.createAndModify(souscategorie);
+    public  SousCategorie create(SousCategorieDTO souscategorie) {
+    	SousCategorie persitentsouscategory=new SousCategorie(souscategorie.getIddto(),souscategorie.getNamedto(),souscategorie.getProducts(),souscategorie.getCategorie());
+        return sousCategorieService.createAndModify(persitentsouscategory);
     }
 }

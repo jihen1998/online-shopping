@@ -5,32 +5,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
-@Entity
-@AllArgsConstructor
+
 @NoArgsConstructor
 @ToString
-public class Order {
+@Document
+@Data
+public class Order implements Serializable{
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateCreated;
@@ -38,10 +30,8 @@ public class Order {
     private String status;
 
     @JsonBackReference
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "pk.order")
     private List<OrderProduct> orderProducts = new ArrayList<>();
 	@JsonBackReference
-    @ManyToOne
 	private User user;
     
     @Transient
@@ -59,10 +49,13 @@ public class Order {
         return this.orderProducts.size();
     }
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
+	public User getUser() {
+		return user;
+	}
 
 	public LocalDate getDateCreated() {
 		return dateCreated;
@@ -86,6 +79,15 @@ public class Order {
 
 	public void setOrderProducts(List<OrderProduct> orderProducts) {
 		this.orderProducts = orderProducts;
+	}
+
+	public Order(String id, LocalDate dateCreated, String status, List<OrderProduct> orderProducts, User user) {
+		super();
+		this.id = id;
+		this.dateCreated = dateCreated;
+		this.status = status;
+		this.orderProducts = orderProducts;
+		this.user = user;
 	}
 
 }

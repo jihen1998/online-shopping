@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.shopping.entities.Categorie;
 import tn.esprit.shopping.entities.SousCategorie;
-import tn.esprit.shopping.repositories.CategorieRepository;
 import tn.esprit.shopping.repositories.SousCategorieRepository;
 
 @Service
@@ -17,7 +15,7 @@ public class SousCategoriServiceImpl implements SousCategorieService {
 	
 	@Override
 	public List<SousCategorie> getAllSousCategories() {
-		return (List<SousCategorie>) sousCategorieRep.findAll();
+		return  sousCategorieRep.findAll();
 	}
 
 	@Override

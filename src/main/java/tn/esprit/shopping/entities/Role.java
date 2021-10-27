@@ -1,14 +1,9 @@
 package tn.esprit.shopping.entities;
+import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import org.hibernate.annotations.NaturalId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,21 +11,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name = "roles")
-public class Role {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+@Document
 
-	@Enumerated(EnumType.STRING)
-	@Column(length = 20)
-	private ERole name;
+public class Role implements Serializable {
+	@Id
+	private String id;
+@Indexed(unique=true)
+		private ERole name;
 
 	
 
@@ -38,11 +29,11 @@ public class Role {
 		this.name = name;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
